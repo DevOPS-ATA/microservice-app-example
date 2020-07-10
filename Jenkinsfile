@@ -18,16 +18,16 @@ pipeline {
                         workingDir: /home/jenkins/agent
                         imagePullPolicy: Always   
                         volumeMounts:
-                        - name: maven-settings
+                        - name: settings-xml
                           mountPath: /usr/share/maven/conf/settings.xml
                           subPath: settings.xml                     
                         command:
                         - cat
                         tty: true
                       volumes:
-                      - name: maven-settings
+                      - name: settings-xml
                         configMap:
-                          name: maven-settings
+                          name: settings-xml
                 """
         }
     }
