@@ -14,7 +14,7 @@ pipeline {
                       - name: regcred-webpre                      
                       containers:
                       - name: maven
-                        image: maven:3-jdk-11-slim
+                        image: maven:3-jdk-8-slim
                         workingDir: /home/jenkins/agent
                         imagePullPolicy: Always   
                         volumeMounts:
