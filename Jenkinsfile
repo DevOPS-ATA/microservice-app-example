@@ -36,7 +36,7 @@ pipeline {
                 container("maven") {
                     script {
                         sh 'ls -la'
-                        ws('users-api/') {
+                        ws("$WORKSPACE/users-api/") {
                             sh 'ls -la'
                             sh 'mvn clean compile'
                         }
@@ -47,7 +47,7 @@ pipeline {
         stage("Test") {
             steps {
                 container("maven") {
-                    ws('users-api/') {
+                    ws("$WORKSPACE/users-api/") {
                         sh 'mvn verify'
                     }
                 }
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 container("maven") {
                     script {
-                        ws('users-api/') {
+                        ws("$WORKSPACE/users-api/") {
                             sh 'mvn package'
                         }
                     }
@@ -69,7 +69,7 @@ pipeline {
             steps {
                 container('maven') {
                     script {
-                        ws('users-api/') {
+                        ws("$WORKSPACE/users-api/") {
                             sh 'mvn deploy'
                         }
                     }
