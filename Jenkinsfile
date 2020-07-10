@@ -14,11 +14,12 @@ pipeline {
                       - name: regcred-webpre                      
                       containers:
                       - name: maven
-                        image: maven:3.6.3-jdk-8
+                        image: maven:3-jdk-11-slim
                         workingDir: /home/jenkins/agent
                         imagePullPolicy: Always   
                         volumeMounts:
-                        - name: settings-xml                                  
+                        - name: settings-xml
+                          mountPath: /usr/share/maven/ref/settings.xml                                  
                         command:
                         - cat
                         tty: true
