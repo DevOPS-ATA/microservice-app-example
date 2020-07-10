@@ -14,7 +14,9 @@ pipeline {
                       - name: regcred-webpre                      
                       containers:
                       - name: maven
-                        image: maven:3.6.3-jdk-8                        
+                        image: maven:3.6.3-jdk-8
+                        workingDir: /home/jenkins/agent
+                        imagePullPolicy: Always                        
                         command:
                         - cat
                         tty: true
