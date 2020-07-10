@@ -35,6 +35,7 @@ pipeline {
             steps {
                 container("maven") {
                     script {
+                        sh 'ls -la'
                         ws('users-api/') {
                             sh 'ls -la'
                             sh 'mvn clean compile'
