@@ -3,9 +3,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'microservices-pipeline'
             defaultContainer 'jnlp'
-            idleMinutes '5'
             yaml """
                     apiVersion: v1
                     kind: Pod
@@ -13,18 +11,10 @@ pipeline {
                     labels:
                     spec:
                       imagePullSecrets:
-                      - name: regcred-webpre
-                      nodeSelector:
-                        jenkins-slave: "true"
+                      - name: regcred-webpre                      
                       containers:
                       - name: maven
-                        image: webpre-adm.es.sedc.internal.vodafone.com:44150/devops/vf-maven-slave:3.6-jdk-8-slim
-                        volumeMounts:
-                        - name: maven-settings
-                          mountPath: /usr/share/maven/conf/settings.xml
-                          subPath: settings.xml
-                        workingDir: /home/jenkins/agent
-                        imagePullPolicy: Always
+                        image: maven:3.6.3-jdk-8                        
                         command:
                         - cat
                         tty: true
