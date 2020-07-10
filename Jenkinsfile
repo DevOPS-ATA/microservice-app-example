@@ -29,24 +29,13 @@ pipeline {
 
     stages {
 
-        stage("Initialize Steps Tools") {
-            steps {
-                container("jnlp") {
-                    script {
-                        environment.ConfigVariables()
-                        gitUtils.getLastCommitterToSlack([branch: "${env.GIT_BRANCH}"])
-
-                    }
-                }
-            }
-        }
-
         stage("Build") {
             steps {
                 container("maven") {
                     script {
-                        mavenArtifacts = maven.resolveMavenArtifacts(context)
-                        maven.Build()
+                        ws('users-api/') {
+                            sh 'mvn clean compile'
+                        }
                     }
                 }
             }
@@ -54,72 +43,52 @@ pipeline {
         stage("Test") {
             steps {
                 container("maven") {
-                    script {
-                        maven.Test()
-
-                    }
-                }
-            }
-        }
-        stage("JaCoCo") {
-            when {
-                expression { return !(env.branch ==~ /(?i)(PR-master)/) }
-            }
-            steps {
-                container("maven") {
-                    script {
-                        maven.Jacoco()
+                    ws('users-api/') {
+                        sh 'mvn verify'
                     }
                 }
             }
         }
 
         stage("Package") {
-            when {
-                expression { return !(env.branch ==~ /(?i)(PR-master)/) }
-            }
             steps {
                 container("maven") {
                     script {
-                        maven.Package()
-                        containerLog(name: 'maven', returnLog: false,  limitBytes: 1048576)
+                        ws('users-api/') {
+                            sh 'mvn package'
+                        }
                     }
                 }
             }
         }
         stage("Deploy to Nexus") {
-            // when branch is not feature
-            when {
-                not {
-                    branch "feature/*"
-                }
-                expression { return !(env.branch ==~ /(?i)(PR-master)/) }
-            }
             steps {
                 container('maven') {
                     script {
-                        maven.Deploy(mavenArtifacts)
+                        ws('users-api/') {
+                            sh 'mvn deploy'
+                        }
                     }
                 }
             }
         }
     }
 
-    post {
-        success {
-            script {
-                maven.PostSuccess()
-                slackReports.AggregateMessage(true)
-            }
-
-        }
-        failure {
-            script {
-                slackReports.AggregateMessage(false)
-            }
-        }
-        always {
-            cleanWs()
-        }
-    }
+//    post {
+//        success {
+//            script {
+//                maven.PostSuccess()
+//                slackReports.AggregateMessage(true)
+//            }
+//
+//        }
+//        failure {
+//            script {
+//                slackReports.AggregateMessage(false)
+//            }
+//        }
+//        always {
+//            cleanWs()
+//        }
+//    }
 }
