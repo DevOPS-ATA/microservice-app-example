@@ -34,6 +34,7 @@ pipeline {
                 container("maven") {
                     script {
                         ws('users-api/') {
+                            sh 'ls -la'
                             sh 'mvn clean compile'
                         }
                     }
