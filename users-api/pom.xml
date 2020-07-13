@@ -76,13 +76,13 @@
 		<repository>
 			<id>releases</id>
 			<name>default</name>
-			<url>https://nexus.k8s.ingeniamos.com/repository/maven-releases/</url>
+			<url>http://nexus.k8s.ingeniamos.com/repository/maven-releases/</url>
 		</repository>
 		<!-- use the following if you ARE using a snapshot version. -->
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>default</name>
-			<url>https://nexus.k8s.ingeniamos.com/repository/maven-snapshots/</url>
+			<url>http://nexus.k8s.ingeniamos.com/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
