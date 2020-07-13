@@ -71,6 +71,17 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>releases</id>
+			<name>default</name>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>default</name>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
