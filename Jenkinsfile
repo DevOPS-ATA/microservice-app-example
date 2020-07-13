@@ -77,7 +77,7 @@ pipeline {
                 container('maven') {
                     script {
                         ws("$WORKSPACE/users-api/") {
-                            sh 'mvn deploy'
+                            sh 'mvn deploy -Dmaven.test.skip=true'
                         }
                     }
                 }
