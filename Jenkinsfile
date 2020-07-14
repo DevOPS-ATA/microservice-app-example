@@ -19,7 +19,10 @@ pipeline {
                         imagePullPolicy: Always   
                         volumeMounts:
                         - name: settings-xml
-                          mountPath: /usr/share/maven/ref/settings.xml                                  
+                          mountPath: /usr/share/maven/ref/settings.xml
+                        - name: volume-ca-bundle
+                          mountPath: /etc/ssl/certs/java/cacerts # Alpine / Debian / Ubuntu / Gentoo etc.
+                          subPath: cacerts                                  
                         command:
                         - cat
                         tty: true
@@ -27,6 +30,9 @@ pipeline {
                       - name: settings-xml
                         configMap:
                           name: settings-xml
+                      - name: volume-ca-bundle
+                        configMap:
+                          name: ca-bundle                         
                 """
         }
     }
