@@ -104,7 +104,6 @@ pipeline {
                 container('buildah') {
                     script {
                         ws("$WORKSPACE/users-api/") {
-                            sh 'cat /root/.m2/settings.xml'
                             sh 'mvn deploy -Dmaven.test.skip=true'
                         }
                     }
