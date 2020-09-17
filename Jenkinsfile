@@ -25,7 +25,18 @@ pipeline {
                           subPath: cacerts                                  
                         command:
                         - cat
-                        tty: true                      
+                        tty: true
+                      - name: buildah
+                        image: 'quay.io/buildah/stable:v1.11.0'
+                        imagePullPolicy: IfNotPresent
+                        command:
+                        - /bin/cat
+                        tty: true
+                        securityContext:
+                          privileged: true
+                        volumeMounts:
+                        - mountPath: /var/lib/containers
+                          name: buildah-storage                        
                       volumes:
                       - name: settings-xml
                         configMap:
@@ -43,6 +54,15 @@ pipeline {
     }
 
     stages {
+        stage("Prueba") {
+            steps {
+                container("buildah") {
+                    script {
+                        sh 'buildah images'
+                    }
+                }
+            }
+        }
 
         stage("Build") {
             steps {
