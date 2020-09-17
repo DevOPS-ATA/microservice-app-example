@@ -26,6 +26,16 @@ pipeline {
                         command:
                         - cat
                         tty: true
+                      initContainers:
+                      - name: install
+                        image: busybox
+                        command:
+                        - cp
+                        - /usr/share/maven/ref/settings.xml
+                        - /root/.m2/settings.xml                        
+                        volumeMounts:
+                        - name: settings-xml
+                          mountPath: /usr/share/maven/ref/
                       volumes:
                       - name: settings-xml
                         configMap:
