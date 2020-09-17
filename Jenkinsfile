@@ -50,6 +50,7 @@ pipeline {
                     script {
                         sh 'ls -la'
                         ws("$WORKSPACE/users-api/") {
+                            sh 'mkdir /root/.m2/'
                             sh 'cp /usr/share/maven/ref/settings.xml /root/.m2/settings.xml'
                             sh 'mvn clean compile'
                         }
