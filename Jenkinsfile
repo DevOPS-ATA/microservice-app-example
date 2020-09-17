@@ -101,7 +101,7 @@ pipeline {
         }
         stage("Upload artifac to Nexus") {
             steps {
-                container('maven') {
+                container('buildah') {
                     script {
                         ws("$WORKSPACE/users-api/") {
                             sh 'cat /root/.m2/settings.xml'
@@ -113,7 +113,7 @@ pipeline {
         }
         stage("Create and Upload image to Registry") {
             steps {
-                container('maven') {
+                container('buildah') {
                     script {
                         sh "buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/microapp/userapi:master ."
                         sh "buildah push --tls-verify=true  image-registry.openshift-image-registry.svc:5000/microapp/userapi:master docker://image-registry.openshift-image-registry.svc:5000/microapp/userapi:master"
