@@ -101,7 +101,7 @@ pipeline {
         }
         stage("Upload artifac to Nexus") {
             steps {
-                container('buildah') {
+                container('maven') {
                     script {
                         ws("$WORKSPACE/users-api/") {
                             sh 'mvn deploy -Dmaven.test.skip=true'
