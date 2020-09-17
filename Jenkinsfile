@@ -53,7 +53,7 @@ pipeline {
         disableConcurrentBuilds()
     }
 
-    stages {
+    /*stages {
         stage("Prueba") {
             steps {
                 container("buildah") {
@@ -62,7 +62,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
         stage("Build") {
             steps {
