@@ -11,14 +11,7 @@ pipeline {
                     labels:
                     spec:
                       imagePullSecrets:
-                      - name: regcred-webpre
-                      initContainers:
-                      - name: copy
-                        image: busybox:1.28
-                        command: ["/bin/sh", "-c", "cp /usr/share/maven/ref/settings.xml /root/.m2/settings.xml"]
-                        volumeMounts:
-                        - name: settings-xml
-                          mountPath: /usr/share/maven/ref/                   
+                      - name: regcred-webpre                                  
                       containers:
                       - name: maven
                         image: maven:3-jdk-8-slim
@@ -57,7 +50,7 @@ pipeline {
                     script {
                         sh 'ls -la'
                         ws("$WORKSPACE/users-api/") {
-                            sh 'ls -la'
+                            sh 'cp /usr/share/maven/ref/settings.xml /root/.m2/settings.xml'
                             sh 'mvn clean compile'
                         }
                     }
@@ -90,7 +83,7 @@ pipeline {
                 container('maven') {
                     script {
                         ws("$WORKSPACE/users-api/") {
-                            sh 'cat /usr/share/maven/ref/settings.xml'
+                            sh 'cat /root/.m2/settings.xml'
                             sh 'mvn deploy -Dmaven.test.skip=true'
                         }
                     }
