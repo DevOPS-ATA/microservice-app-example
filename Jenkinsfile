@@ -114,8 +114,10 @@ pipeline {
             steps {
                 container('buildah') {
                     script {
-                        sh "buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/microapp/userapi:master ."
-                        sh "buildah push --tls-verify=true  image-registry.openshift-image-registry.svc:5000/microapp/userapi:master docker://image-registry.openshift-image-registry.svc:5000/microapp/userapi:master"
+                        ws("$WORKSPACE/users-api/") {
+                            sh "buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/microapp/userapi:master ."
+                            sh "buildah push --tls-verify=true  image-registry.openshift-image-registry.svc:5000/microapp/userapi:master docker://image-registry.openshift-image-registry.svc:5000/microapp/userapi:master"
+                        }
                     }
                 }
             }
