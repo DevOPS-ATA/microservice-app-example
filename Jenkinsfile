@@ -56,7 +56,7 @@ pipeline {
     }
 
     stages {
-       /* stage("Prueba") {
+        stage("Prueba") {
             steps {
                 container("buildah") {
                     script {
@@ -64,7 +64,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
         stage("Build") {
             steps {
