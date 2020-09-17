@@ -11,7 +11,14 @@ pipeline {
                     labels:
                     spec:
                       imagePullSecrets:
-                      - name: regcred-webpre                      
+                      - name: regcred-webpre
+                      initContainers:
+                      - name: copy
+                        image: busybox:1.28
+                        command: ["/bin/sh", "-c", "cp /usr/share/maven/ref/settings.xml /root/.m2/settings.xml"]
+                        volumeMounts:
+                        - name: settings-xml
+                          mountPath: /usr/share/maven/ref/                   
                       containers:
                       - name: maven
                         image: maven:3-jdk-8-slim
@@ -25,17 +32,7 @@ pipeline {
                           subPath: cacerts                                  
                         command:
                         - cat
-                        tty: true
-                      initContainers:
-                      - name: install
-                        image: busybox
-                        command:
-                        - cp
-                        - "/usr/share/maven/ref/settings.xml"
-                        - "/root/.m2/settings.xml"                        
-                        volumeMounts:
-                        - name: settings-xml
-                          mountPath: /usr/share/maven/ref/
+                        tty: true                      
                       volumes:
                       - name: settings-xml
                         configMap:
