@@ -8,10 +8,12 @@ pipeline {
                     apiVersion: v1
                     kind: Pod
                     metadata:
+                      annotations:
+                        openshift.io/scc: privileged
                     labels:
                     spec:
                       imagePullSecrets:
-                      - name: regcred-webpre
+                      - name: deployer-dockercfg-bxmwv
                       serviceAccountName: pipeline                                 
                       containers:
                       - name: maven
