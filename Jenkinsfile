@@ -31,9 +31,7 @@ pipeline {
                         imagePullPolicy: Always
                         command:
                         - /bin/cat
-                        tty: true
-                        securityContext:
-                          privileged: true
+                        tty: true                        
                         volumeMounts:
                         - mountPath: /var/lib/containers
                           name: buildah-storage                        
