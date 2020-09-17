@@ -53,16 +53,6 @@ pipeline {
         disableConcurrentBuilds()
     }
 
-    /*stages {
-        stage("Prueba") {
-            steps {
-                container("buildah") {
-                    script {
-                        sh 'buildah images'
-                    }
-                }
-            }
-        }*/
 
         stage("Build") {
             steps {
