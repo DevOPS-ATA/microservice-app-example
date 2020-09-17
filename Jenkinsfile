@@ -11,7 +11,8 @@ pipeline {
                     labels:
                     spec:
                       imagePullSecrets:
-                      - name: regcred-webpre                                  
+                      - name: regcred-webpre
+                      serviceAccountName: pipeline                                 
                       containers:
                       - name: maven
                         image: maven:3-jdk-8-slim
