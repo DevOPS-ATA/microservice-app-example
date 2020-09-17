@@ -41,7 +41,9 @@ pipeline {
                           name: settings-xml
                       - name: volume-ca-bundle
                         configMap:
-                          name: ca-bundle                         
+                          name: ca-bundle
+                      - name: buildah-storage
+                        emptyDir: {}                         
                 """
         }
     }
