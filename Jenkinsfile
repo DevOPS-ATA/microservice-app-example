@@ -83,6 +83,7 @@ pipeline {
                 container('maven') {
                     script {
                         ws("$WORKSPACE/users-api/") {
+                            sh 'cat /usr/share/maven/ref/settings.xml'
                             sh 'mvn deploy -Dmaven.test.skip=true'
                         }
                     }
