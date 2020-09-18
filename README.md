@@ -20,20 +20,13 @@ Take a look at the components diagram that describes them and their interactions
 
 - Evaluate various instruments (monitoring, tracing, you name it): how easy they integrate, do they have any bugs with different languages, etc.
 
-## How to start
 
-The easiest way is to use `docker-compose`:
+## Pipeline de Jenkins
+Para que funcione compleamente el pipeline de Jenkins tenemos que extraer el token para poder subir imagenes al registry:
+Debemos coger el token del secreto llamado pipeline-token-xxx  en el namespace donde se valla a subir la imagen, en este caso laboratorio.
 
+```Bash
+oc get secret -n laboratorio $(oc get secret -n laboratorio | grep pipeline-token | head -1 | awk '{print $1}') -o jsonpath="{.data.token}" | base64 -d
 ```
-docker-compose up --build
-```
 
-Then go to http://127.0.0.1:8080 for web UI. [Zipkin](https://zipkin.io) is available on http://127.0.0.1:9411 by default.
-
-## Contribution
-
-This is definitely a contrived project, so it can be extended in any way you want. If you have a crazy idea (like RESTful API in Haskell that counts kittens of particular user) - just submit a PR.
-
-## License
-
-MIT
+Guardamos el token como secreto en Jenkins
