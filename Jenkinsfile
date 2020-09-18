@@ -127,6 +127,7 @@ pipeline {
                               buildah login --tls-verify=false -u sa -p $(cat /var/run/secrets/kubernetes.io/serviceaccount/token) image-registry.openshift-image-registry.svc:5000/laboratorio/userapi && \
                               buildah push --tls-verify=false image-registry.openshift-image-registry.svc:5000/laboratorio/userapi:master docker://image-registry.openshift-image-registry.svc:5000/laboratorio/userapi:master
                               buildah images
+                              sleep 3h
                             '''
                         }
                     }
