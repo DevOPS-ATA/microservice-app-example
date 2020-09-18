@@ -123,9 +123,9 @@ pipeline {
                         ws("$WORKSPACE/users-api/") {
                             sh '''
                               
-                              buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/microapp/userapi:master .
-                              buildah login --tls-verify=false -u sa -p $(cat /var/run/secrets/kubernetes.io/serviceaccount/token) image-registry.openshift-image-registry.svc:5000/microapp/userapi && \
-                              buildah push --tls-verify=false image-registry.openshift-image-registry.svc:5000/microapp/userapi:master docker://image-registry.openshift-image-registry.svc:5000/microapp/userapi:master
+                              buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/laboratorio/userapi:master .
+                              buildah login --tls-verify=false -u sa -p $(cat /var/run/secrets/kubernetes.io/serviceaccount/token) image-registry.openshift-image-registry.svc:5000/laboratorio/userapi && \
+                              buildah push --tls-verify=false image-registry.openshift-image-registry.svc:5000/laboratorio/userapi:master docker://image-registry.openshift-image-registry.svc:5000/laboratorio/userapi:master
                               buildah images
                             '''
                         }
