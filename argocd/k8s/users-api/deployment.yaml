@@ -27,5 +27,5 @@ spec:
         name: users-api
         ports:
         - containerPort: 8083
-        imagePullPolicy: Never
+        imagePullPolicy: Always
       restartPolicy: Always

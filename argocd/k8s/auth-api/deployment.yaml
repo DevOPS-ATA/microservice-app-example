@@ -29,5 +29,5 @@ spec:
         name: auth-api
         ports:
         - containerPort: 8081
-        imagePullPolicy: Never
+        imagePullPolicy: Always
       restartPolicy: Always

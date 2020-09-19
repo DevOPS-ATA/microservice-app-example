@@ -28,5 +28,5 @@ spec:
           
         image: image-registry.openshift-image-registry.svc:5000/laboratorio/log-message-processor:1.0.0
         name: log-message-processor
-        imagePullPolicy: Never
+        imagePullPolicy: Always
       restartPolicy: Always
