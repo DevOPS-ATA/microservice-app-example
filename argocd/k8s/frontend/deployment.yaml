@@ -22,7 +22,7 @@ spec:
           value: http://todos-api:8082
         - name: ZIPKIN_URL
           value: http://zipkin:9411/api/v2/spans
-        image: frontend
+        image: image-registry.openshift-image-registry.svc:5000/laboratorio/frontend:1.0.0
         name: frontend
         ports:
         - containerPort: 8080

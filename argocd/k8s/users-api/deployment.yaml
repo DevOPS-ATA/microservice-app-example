@@ -20,7 +20,7 @@ spec:
           value: "8083"
         - name: SPRING_ZIPKIN_BASE_URL
           value: http://zipkin:9411
-        image: users-api
+        image: image-registry.openshift-image-registry.svc:5000/laboratorio/users-api:0.0.1-SNAPSHOT
         name: users-api
         ports:
         - containerPort: 8083

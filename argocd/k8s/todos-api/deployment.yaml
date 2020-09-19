@@ -27,7 +27,7 @@ spec:
         - name: ZIPKIN_URL
           value: http://zipkin:9411/api/v2/spans
           
-        image: todos-api
+        image: image-registry.openshift-image-registry.svc:5000/laboratorio/todos-api:1.0.0
         name: todos-api
         ports:
         - containerPort: 8082
