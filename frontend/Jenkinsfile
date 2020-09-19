@@ -1,0 +1,69 @@
+#!groovy
+
+def VERSION = '1.0.0'
+pipeline {
+    agent {
+        kubernetes {
+            defaultContainer 'jnlp'
+            yaml """
+                    apiVersion: v1
+                    kind: Pod
+                    metadata:
+                      annotations:
+                        openshift.io/scc: privileged
+                    labels:
+                    spec:
+                      imagePullSecrets:
+                      - name: deployer-dockercfg-bxmwv
+                      serviceAccountName: pipeline
+                      containers:
+                      - name: buildah
+                        image: 'quay.io/buildah/stable:v1.11.0'
+                        imagePullPolicy: Always
+                        command:
+                        - /bin/cat
+                        tty: true
+                        securityContext:
+                          privileged: true
+                          runAsUser: 0
+                        volumeMounts:
+                        - mountPath: /var/lib/containers
+                          name: buildah-storage
+                      volumes:
+                      - name: volume-ca-bundle
+                        configMap:
+                          name: ca-bundle
+                      - name: buildah-storage
+                        emptyDir: {}
+                """
+        }
+    }
+
+    options {
+        timeout(time: 2, unit: 'HOURS')
+        disableConcurrentBuilds()
+    }
+
+    stages {
+
+        stage("Create and Upload image to Registry") {
+            steps {
+                container('buildah') {
+                    script {
+                        ws("$WORKSPACE/frontend/") {
+                            withCredentials([usernamePassword(credentialsId: 'pipeline-laboratorio', passwordVariable: 'TOKEN', usernameVariable: 'USER')]) {
+                                sh """
+                                    buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/laboratorio/frontend:$VERSION .
+                                    buildah push --tls-verify=false --creds=pipeline:$TOKEN image-registry.openshift-image-registry.svc:5000/laboratorio/frontend:$VERSION docker://image-registry.openshift-image-registry.svc:5000/laboratorio/frontend:$VERSION
+                                    buildah images
+                            """
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
