@@ -29,4 +29,4 @@ Debemos coger el token del secreto llamado pipeline-token-xxx  en el namespace d
 oc get secret -n laboratorio $(oc get secret -n laboratorio | grep pipeline-token | head -1 | awk '{print $1}') -o jsonpath="{.data.token}" | base64 -d
 ```
 
-Guardamos el token como secreto en Jenkins
+Guardamos el token como secreto en Jenkins con el usuario pipeline
