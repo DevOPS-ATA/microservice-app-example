@@ -21,4 +21,4 @@ spec:
         - destination:
             host: redis-queue
             subset: v1
-        weight: 100
+          weight: 100

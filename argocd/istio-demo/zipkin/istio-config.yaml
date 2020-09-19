@@ -21,3 +21,4 @@ spec:
         - destination:
             host: zipkin
             subset: v1
+          weight: 100
