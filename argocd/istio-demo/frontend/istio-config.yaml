@@ -10,12 +10,32 @@ spec:
         version: v1
 ---
 apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gateway-frontend
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: microapp-cert-ingress # This should match the Certificate secretName
+      hosts:
+        - microapp-istio.ibmcloud.ingeniamos.com # This should match a DNS name in the Certificate
+---
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: frontend
 spec:
   hosts:
-    - frontend
+    - microapp-istio.ibmcloud.ingeniamos.com
+  gateways:
+    - gateway-frontend
   http:
     - route:
         - destination:
