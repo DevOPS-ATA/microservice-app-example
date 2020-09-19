@@ -17,6 +17,7 @@ spec:
       labels:
         app: microservice-app-example
         service: log-message-processor
+        version: v1
     spec:
       containers:
       - env:

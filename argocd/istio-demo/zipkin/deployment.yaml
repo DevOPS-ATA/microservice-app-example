@@ -16,6 +16,7 @@ spec:
       labels:
         app: microservice-app-example
         service: zipkin
+        version: v1
     spec:
       containers:
       - env:

@@ -17,6 +17,7 @@ spec:
       labels:
         app: microservice-app-example
         service: frontend
+        version: v1
     spec:
       containers:
       - env:

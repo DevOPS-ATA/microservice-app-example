@@ -16,6 +16,7 @@ spec:
       labels:
         app: microservice-app-example
         service: users-api
+        version: v1
     spec:
       containers:
       - env:
