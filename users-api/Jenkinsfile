@@ -67,10 +67,9 @@ pipeline {
                     script {
                         ws("$WORKSPACE/users-api/") {
                             sh 'ls -la'
-                            VERSION = sh(script: '''
-                                                    pom = readMavenPom file: 'pom.xml'
-                                                    pom.version
-                                                ''',  returnStdout: true)
+                            def pom = readMavenPom file: 'pom.xml'
+                            VERSION = pom.version
+
                         }
                     }
                 }
