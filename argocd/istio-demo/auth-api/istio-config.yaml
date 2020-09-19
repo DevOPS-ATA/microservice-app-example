@@ -15,9 +15,9 @@ metadata:
   name: auth-api
 spec:
   hosts:
-    - auth-api
+    - auth-api.laboratorio-istio.svc.cluster.local
   http:
     - route:
         - destination:
-            host: auth-api
+            host: auth-api.laboratorio-istio.svc.cluster.local
             subset: v1
