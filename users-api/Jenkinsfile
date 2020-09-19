@@ -142,21 +142,4 @@ pipeline {
         }
     }
 
-//    post {
-//        success {
-//            script {
-//                maven.PostSuccess()
-//                slackReports.AggregateMessage(true)
-//            }
-//
-//        }
-//        failure {
-//            script {
-//                slackReports.AggregateMessage(false)
-//            }
-//        }
-//        always {
-//            cleanWs()
-//        }
-//    }
 }
