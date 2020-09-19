@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - microapp-istio.ibmcloud.ingeniamos.com
-      secretName: cjoc-ingress-tls
+        - microapp.ibmcloud.ingeniamos.com
+      secretName: ingress-tls
   rules:
-    - host: microapp-istio.ibmcloud.ingeniamos.com
+    - host: microapp.ibmcloud.ingeniamos.com
       http:
         paths:
           - backend:
