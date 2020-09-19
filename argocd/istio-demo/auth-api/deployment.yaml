@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: microservice-app-example
+    version: v1
   name: auth-api
 spec:
   replicas: 1
