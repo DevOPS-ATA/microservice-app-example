@@ -1,0 +1,33 @@
+apiVersion:  apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: microservice-app-example
+  name: users-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: users-api
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: microservice-app-example
+        service: users-api
+    spec:
+      containers:
+      - env:
+        - name: JWT_SECRET
+          value: myfancysecret
+        - name: SERVER_PORT
+          value: "8083"
+        - name: SPRING_ZIPKIN_BASE_URL
+          value: http://zipkin:9411
+        image: image-registry.openshift-image-registry.svc:5000/laboratorio/userapi:1.0.0
+        name: users-api
+        ports:
+        - containerPort: 8083
+        imagePullPolicy: Always
+      restartPolicy: Always

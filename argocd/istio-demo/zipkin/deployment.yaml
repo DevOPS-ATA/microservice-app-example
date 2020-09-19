@@ -1,0 +1,27 @@
+apiVersion:  apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: microservice-app-example
+  name: zipkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: zipkin
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: microservice-app-example
+        service: zipkin
+    spec:
+      containers:
+      - env:
+        image: openzipkin/zipkin
+        name: zipkin
+        ports:
+        - containerPort: 9411
+        - containerPort: 9410
+      restartPolicy: Always

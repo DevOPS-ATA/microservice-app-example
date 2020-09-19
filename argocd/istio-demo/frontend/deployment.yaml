@@ -1,0 +1,35 @@
+apiVersion:  apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: microservice-app-example
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: frontend
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: microservice-app-example
+        service: frontend
+    spec:
+      containers:
+      - env:
+        - name: AUTH_API_ADDRESS
+          value: http://auth-api:8081
+        - name: PORT
+          value: "8080"
+        - name: TODOS_API_ADDRESS
+          value: http://todos-api:8082
+        - name: ZIPKIN_URL
+          value: http://zipkin:9411/api/v2/spans
+        image: image-registry.openshift-image-registry.svc:5000/laboratorio/frontend:1.0.0
+        name: frontend
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+      restartPolicy: Always
