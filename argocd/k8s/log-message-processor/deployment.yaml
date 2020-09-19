@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-message-processor
+      service: log-message-processor
   template:
     metadata:
       labels:
