@@ -53,8 +53,8 @@ pipeline {
                         ws("$WORKSPACE/users-api/") {
                             withCredentials([usernamePassword(credentialsId: 'pipeline-laboratorio', passwordVariable: 'TOKEN', usernameVariable: 'USER')]) {
                                 sh """                              
-                                    buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/laboratorio/todo-api:$VERSION .
-                                    buildah push --tls-verify=false --creds=pipeline:$TOKEN image-registry.openshift-image-registry.svc:5000/laboratorio/todo-api:$VERSION docker://image-registry.openshift-image-registry.svc:5000/laboratorio/todo-api:$VERSION
+                                    buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/laboratorio/todos-api:$VERSION .
+                                    buildah push --tls-verify=false --creds=pipeline:$TOKEN image-registry.openshift-image-registry.svc:5000/laboratorio/todos-api:$VERSION docker://image-registry.openshift-image-registry.svc:5000/laboratorio/todos-api:$VERSION
                                     buildah images                              
                             """
                             }
