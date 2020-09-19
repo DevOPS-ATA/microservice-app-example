@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: microservice-app-example
+    version: v1
   name: log-message-processor
 spec:
   replicas: 1
