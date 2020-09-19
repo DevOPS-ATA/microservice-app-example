@@ -29,3 +29,10 @@ To access Zipkin UI you can use this command:
 ```shell
 $ minikube service zipkin
 ```
+
+Añadir permisos para bajar imagenes creadas en el namespace de laboratorio dentro de laboratorio-istio
+
+oc policy add-role-to-user system:image-puller system:serviceaccount:laboratorio-istio:default -n laboratorio
+
+registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:a3229d72fa3e9375426fa0cf7b1d56f607b8198c05c029805436c8d47d92fd99
+registry.redhat.io/openshift-service-mesh/registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:a3229d72fa3e9375426fa0cf7b1d56f607b8198c05c029805436c8d47d92fd99:1.1.8

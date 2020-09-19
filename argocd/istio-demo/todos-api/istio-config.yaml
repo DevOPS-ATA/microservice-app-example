@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: todos-api
+spec:
+  host: todos-api
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: todos-api
+spec:
+  hosts:
+    - todos-api
+  http:
+    - route:
+        - destination:
+            host: todos-api
+            subset: v1
