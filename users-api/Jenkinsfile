@@ -65,8 +65,8 @@ pipeline {
             steps {
                 container("maven") {
                     script {
-                        sh 'ls -la'
                         ws("$WORKSPACE/users-api/") {
+                            sh 'ls -la'
                             VERSION = sh(script: '''
                                                     pom = readMavenPom file: 'pom.xml'
                                                     pom.version
