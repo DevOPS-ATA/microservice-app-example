@@ -50,7 +50,7 @@ pipeline {
             steps {
                 container('buildah') {
                     script {
-                        ws("$WORKSPACE/users-api/") {
+                        ws("$WORKSPACE/todos-api/") {
                             withCredentials([usernamePassword(credentialsId: 'pipeline-laboratorio', passwordVariable: 'TOKEN', usernameVariable: 'USER')]) {
                                 sh """                              
                                     buildah bud --format=oci --tls-verify=true --layers -f ./Dockerfile -t image-registry.openshift-image-registry.svc:5000/laboratorio/todos-api:$VERSION .
