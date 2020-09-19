@@ -6,6 +6,8 @@ spec:
   secretName: microapp-cert-ingress
   dnsNames:
     - "microapp-istio.ibmcloud.ingeniamos.com"
+    - microapp-istio.172.21.145.195.nip.io
+    - microapp-istio.158.177.178.83.nip.io
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

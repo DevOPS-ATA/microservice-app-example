@@ -26,6 +26,8 @@ spec:
         credentialName: microapp-cert-ingress # This should match the Certificate secretName
       hosts:
         - microapp-istio.ibmcloud.ingeniamos.com # This should match a DNS name in the Certificate
+        - microapp-istio.172.21.145.195.nip.io
+        - microapp-istio.158.177.178.83.nip.io
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -34,6 +36,8 @@ metadata:
 spec:
   hosts:
     - microapp-istio.ibmcloud.ingeniamos.com
+    - microapp-istio.172.21.145.195.nip.io
+    - microapp-istio.158.177.178.83.nip.io
   gateways:
     - gateway-frontend
   http:
