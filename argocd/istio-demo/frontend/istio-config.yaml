@@ -15,7 +15,7 @@ metadata:
   name: gateway-frontend
 spec:
   selector:
-    istio: ingressgateway
+    istio: kourier
   servers:
     - port:
         number: 443
