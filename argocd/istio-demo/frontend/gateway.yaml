@@ -1,17 +1,21 @@
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: microdemo-gateway
 spec:
   selector:
-    istio: ingressgateway # use istio default controller
+    istio: ingressgateway
   servers:
     - port:
         number: 443
         name: https
         protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: imicroapp-cert-ingress # This should match the Certificate secretName
       hosts:
-        - "microapp.istio-ibmcloud.ingeniamos.com"
+        - microapp.istio-ibmcloud.ingeniamos.com # This should match a DNS name in the Certificate
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
