@@ -38,8 +38,7 @@ metadata:
   name: microdemo
 spec:
   hosts:
-    - "microapp.istio-ibmcloud.ingeniamos.com"
-    - "microapp.ibmcloud.ingeniamos.com"
+    - "*"
   gateways:
     - microdemo-gateway
   http:
