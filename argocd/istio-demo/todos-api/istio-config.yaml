@@ -4,21 +4,10 @@ metadata:
   name: todos-api
 spec:
   host: todos-api
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
   subsets:
     - name: v1
       labels:
         version: v1
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: todos-api
-spec:
-  hosts:
-    - todos-api
-  http:
-    - route:
-        - destination:
-            host: todos-api
-            subset: v1
-          weight: 100
