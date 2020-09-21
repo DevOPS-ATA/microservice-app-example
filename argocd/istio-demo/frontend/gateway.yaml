@@ -13,10 +13,10 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: imicroapp-cert-ingress # This should match the Certificate secretName
+        credentialName: microapp-cert-ingress # This should match the Certificate secretName
       hosts:
-        - microapp.istio-ibmcloud.ingeniamos.com # This should match a DNS name in the Certificate
-        - microapp.ibmcloud.ingeniamos.com # This should match a DNS name in the Certificate
+        - "*"
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
