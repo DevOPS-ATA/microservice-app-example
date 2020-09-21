@@ -9,4 +9,3 @@ spec:
   - port: 9411
   selector:
     service: zipkin
-  type: ClusterIP
